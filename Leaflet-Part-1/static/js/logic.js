@@ -1,5 +1,7 @@
 // Create the 'basemap' tile layer that will be the background of our map.
-
+let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap,/a> contributors'
+})
 
 // OPTIONAL: Step 2
 // Create the 'street' tile layer as a second background of the map
@@ -22,6 +24,11 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   // the map. Pass the magnitude and depth of the earthquake into two separate functions
   // to calculate the color and radius.
   function styleInfo(feature) {
+    return {
+      fillOpacity: 0.75,
+      color: getColor(feature.geometry.coordinates[2]),
+      radius: getRadius(feature.properties.mag)
+    };
 
   }
 
